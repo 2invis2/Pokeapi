@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.list.presenter.ListActivity">
+    tools:context=".features.list.presenter.ListActivity">
 
     <TextView
         android:layout_width="wrap_content"

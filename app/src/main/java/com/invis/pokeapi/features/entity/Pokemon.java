@@ -1,4 +1,4 @@
-package com.invis.pokeapi.feature.entity;
+package com.invis.pokeapi.features.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
