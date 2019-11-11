@@ -6,7 +6,8 @@ import com.invis.pokeapi.App;
 import com.invis.pokeapi.features.data.PokemonAPI;
 import com.invis.pokeapi.features.data.PokemonRepository;
 import com.invis.pokeapi.features.data.PokemonRepositoryImpl;
-import com.invis.pokeapi.features.entity.Pokemon;
+import com.invis.pokeapi.features.data.PokemonServer;
+import com.invis.pokeapi.features.data.PokemonServerImpl;
 import com.invis.pokeapi.features.list.domain.ListInteractor;
 import com.invis.pokeapi.features.list.domain.ListInteractorImpl;
 
@@ -17,7 +18,8 @@ final class PresenterFactory {
                 .getRetrofit()
                 .create(PokemonAPI.class);
 
-        final PokemonRepository repository = new PokemonRepositoryImpl(api);
+        final PokemonServer server = new PokemonServerImpl(api);
+        final PokemonRepository repository = new PokemonRepositoryImpl(server);
         final ListInteractor interactor = new ListInteractorImpl(repository);
 
         return new ListPresenter(interactor);
