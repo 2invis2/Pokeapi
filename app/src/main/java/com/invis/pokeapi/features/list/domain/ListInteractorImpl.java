@@ -8,4 +8,5 @@ import lombok.AllArgsConstructor;
 public class ListInteractorImpl implements ListInteractor {
     private PokemonRepository repository;
 
+
 }
