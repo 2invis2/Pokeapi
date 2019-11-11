@@ -1,6 +1,7 @@
 package com.invis.pokeapi.features.data;
 
 import com.invis.pokeapi.features.data.model.PokemonJson;
+import com.invis.pokeapi.features.entity.Pokemon;
 import com.invis.pokeapi.network.Carry;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
     @Override
     public ArrayList<String> loadPokemonListUrl() {
-        final ArrayList<String> pokemonListUrl = new ArrayList<String>();
+        final ArrayList<String> pokemonListUrl = new ArrayList<String>(0);
         pokemonServer.loadPokemonListUrl(new Carry<ArrayList<String>>() {
 
             @Override
@@ -31,8 +32,8 @@ public class PokemonRepositoryImpl implements PokemonRepository {
     }
 
     @Override
-    public ArrayList<PokemonJson> loadPokemonList() {
-        final ArrayList<PokemonJson> pokemonList = new ArrayList<PokemonJson>();
+    public ArrayList<Pokemon> loadPokemonList() {
+        final ArrayList<Pokemon> pokemonList = new ArrayList<Pokemon>();
         ArrayList<String> pokemonListUrl = this.loadPokemonListUrl();
 
         for (int i = 0; i < pokemonListUrl.size(); i++) {
@@ -40,7 +41,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             pokemonServer.getPokemon(urlSplitArray[5], new Carry<PokemonJson>() {
                 @Override
                 public void onSuccess(PokemonJson result) {
-                    pokemonList.add(result);
+                    pokemonList.add(result.toPokemon());
                 }
 
                 @Override

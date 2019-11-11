@@ -1,10 +1,10 @@
 package com.invis.pokeapi.features.data;
 
-import com.invis.pokeapi.features.data.model.PokemonJson;
+import com.invis.pokeapi.features.entity.Pokemon;
 
 import java.util.ArrayList;
 
 public interface PokemonRepository {
     ArrayList<String> loadPokemonListUrl();
-    ArrayList<PokemonJson> loadPokemonList();
+    ArrayList<Pokemon> loadPokemonList();
 }
