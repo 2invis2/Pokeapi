@@ -1,43 +1,65 @@
 package com.invis.pokeapi.features.list.presenter;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.invis.pokeapi.R;
+import com.invis.pokeapi.features.BaseActivity;
+import com.invis.pokeapi.features.MvpView;
+import com.invis.pokeapi.features.entity.Pokemon;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
+public class ListActivity extends BaseActivity implements ListView {
 
-public class ListActivity extends AppCompatActivity {
+    private ListPresenter presenter;
+    private TextView pokemon;
+    private ArrayList<Pokemon> pokemonList;
+
+    @Override
+    protected  ListPresenter getPresenter() {
+        presenter = new PresenterFactory().createPresenter(this);
+        return presenter;
+    }
+
+    @Override
+    protected MvpView getMvpView() {
+        return this;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        initView();
 
-        BufferedReader reader = null;
-        URL url = null;
-        try {
-            url = new URL("https://pokeapi.co/api/v2/pokemon/1/");
-            HttpsURLConnection mConnect=(HttpsURLConnection)url.openConnection();
-            mConnect.setRequestMethod("GET");
-            mConnect.setReadTimeout(10000);
-            mConnect.connect();
-            reader= new BufferedReader(new InputStreamReader(mConnect.getInputStream()));
 
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    }
+
+    private void initView(){
+
+        pokemon = (TextView) findViewById(R.id.text_view);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        presenter.loadPokemonList();
+    }
+
+    @Override
+    public void showPokemonList(Pokemon pokemonServer) {
+        pokemonList = new ArrayList<Pokemon>(0);
+        pokemonList.add(pokemonServer);
+
+        pokemon.setText(pokemonList.get(0).getName());
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

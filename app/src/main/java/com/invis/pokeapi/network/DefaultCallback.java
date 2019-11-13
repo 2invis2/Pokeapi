@@ -16,10 +16,16 @@ public final class DefaultCallback<T> implements Callback<T> {
 
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
-        T body = response.body();
-        if (body != null) {
-            carry.onSuccess(body);
-        } else {
+
+        if (response.isSuccessful()) {
+            T body = response.body();
+            if (body != null) {
+                carry.onSuccess(body);
+            } else {
+                carry.onFailure(new EmptyBodyException());
+            }
+        }
+        else {
             carry.onFailure(new EmptyBodyException());
         }
     }
