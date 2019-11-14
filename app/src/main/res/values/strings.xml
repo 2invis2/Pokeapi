@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Pokeapi</string>
+
+    <string name="str_number">Number:\u0020</string>
+    <string name="str_height">Height:\u0020</string>
+    <string name="str_weight">Weight:\u0020</string>
+    <string name="str_type">Type:\u0020</string>
+    <string name="str_attack">Attack:\u0020</string>
+    <string name="str_defense">Defense:\u0020</string>
+    <string name="str_hp">HP:\u0020</string>
+
+    <string name="checkbox_attack">Attack</string>
+    <string name="checkbox_defense">Defense</string>
+    <string name="checkbox_hp">HP</string>
+
 </resources>

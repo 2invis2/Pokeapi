@@ -6,7 +6,6 @@ public class MvpPresenter<View extends MvpView> {
 
     public void attachView(View view) {
         this.view = view;
-        onViewReady();
     }
 
     public void detachView() {

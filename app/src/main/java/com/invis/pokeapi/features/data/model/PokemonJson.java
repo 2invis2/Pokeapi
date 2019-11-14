@@ -37,8 +37,8 @@ public class PokemonJson {
     private ArrayList<PokemonHeldItem> held_items;
     private String location_area_encounters;
     private ArrayList<PokemonMove> moves;
+    private NamedAPIResource species;
     private PokemonSprites sprites;
-    private ArrayList<NamedAPIResource> species;
     private ArrayList<PokemonStat> stats;
     private ArrayList<PokemonType> types;
 
@@ -49,7 +49,7 @@ public class PokemonJson {
         }
 
         ArrayList<PokemonStatApp> pokemonStatsApp = new ArrayList<PokemonStatApp>(0);
-        for (int i = 0; i < types.size(); i++){
+        for (int i = 0; i < stats.size(); i++){
             pokemonStatsApp.add(stats.get(i).toPokemonStatApp());
         }
         return new Pokemon(id, name, height, weight, pokemonTypes, pokemonStatsApp);
