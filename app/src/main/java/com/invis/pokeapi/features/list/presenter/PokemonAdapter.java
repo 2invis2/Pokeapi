@@ -50,8 +50,10 @@ class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> 
     }
 
     public void setPokemons(List<Pokemon> pokemonList) {
+        List<Pokemon> pokemonListTmp = new ArrayList<>();
+        pokemonListTmp.addAll(pokemonList);
         pokemons.clear();
-        pokemons.addAll(pokemonList);
+        pokemons.addAll(pokemonListTmp);
         notifyDataSetChanged();
     }
 

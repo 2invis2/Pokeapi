@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.invis.pokeapi.R;
@@ -20,10 +22,13 @@ import java.util.List;
 public class ListActivity extends BaseActivity implements ListView {
 
     private ListPresenter listPresenter;
-    private ArrayList<Pokemon> pokemonList;
+    //private ArrayList<Pokemon> pokemonList;
     private RecyclerView recyclerView;
     private PokemonAdapter adapter;
     private FloatingActionButton reloadButton;
+    private CheckBox attackCheckBox;
+    private CheckBox defenseCheckBox;
+    private CheckBox hpCheckBox;
     private boolean load;
 
     @Override
@@ -57,6 +62,22 @@ public class ListActivity extends BaseActivity implements ListView {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        attackCheckBox = (CheckBox) findViewById(R.id.checkBox_attack);
+        defenseCheckBox = (CheckBox) findViewById(R.id.checkBox_defense);
+        hpCheckBox = (CheckBox) findViewById(R.id.checkBox_hp);
+
+        CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                listPresenter.maxPokemon(adapter.getPokemons(),
+                        attackCheckBox.isChecked(), defenseCheckBox.isChecked(), hpCheckBox.isChecked());
+            }
+        };
+
+        attackCheckBox.setOnCheckedChangeListener(checkedChangeListener);
+        defenseCheckBox.setOnCheckedChangeListener(checkedChangeListener);
+        hpCheckBox.setOnCheckedChangeListener(checkedChangeListener);
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -64,6 +85,9 @@ public class ListActivity extends BaseActivity implements ListView {
 
                 if (!recyclerView.canScrollVertically(1)) {
                     listPresenter.onAddList();
+                    attackCheckBox.setChecked(false);
+                    defenseCheckBox.setChecked(false);
+                    hpCheckBox.setChecked(false);
                 }
             }
         });
@@ -75,6 +99,9 @@ public class ListActivity extends BaseActivity implements ListView {
             public void onClick(View view) {
                 adapter.clearPokemonAdapter();
                 listPresenter.onViewReady();
+                attackCheckBox.setChecked(false);
+                defenseCheckBox.setChecked(false);
+                hpCheckBox.setChecked(false);
             }
         });
     }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ListInteractor {
    void loadPokemonList(Carry<List<Pokemon>> carry);
+   int maxPokemon (List<Pokemon> pokemonList, boolean checkAttack, boolean checkDefense, boolean checkHp);
 }

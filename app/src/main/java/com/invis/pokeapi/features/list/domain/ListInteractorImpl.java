@@ -18,5 +18,17 @@ public class ListInteractorImpl implements ListInteractor {
         repository.loadPokemonList(carry);
     }
 
-
+    @Override
+    public int maxPokemon(List<Pokemon> pokemonList, boolean checkAttack, boolean checkDefense, boolean checkHp) {
+        if(checkAttack || checkDefense || checkHp) {
+            int indexMaxPokemon = 0;
+            for (int i = 1; i < pokemonList.size(); i++) {
+                indexMaxPokemon = ChecksPokemon.maxPokemon(pokemonList.get(indexMaxPokemon), pokemonList.get(i),
+                        indexMaxPokemon, i, checkAttack, checkDefense, checkHp);
+            }
+            return indexMaxPokemon;
+        } else{
+            return 0;
+        }
+    }
 }

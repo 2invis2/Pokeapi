@@ -22,7 +22,7 @@
             android:text="@string/checkbox_attack" />
 
         <CheckBox
-            android:id="@+id/checkBox_defence"
+            android:id="@+id/checkBox_defense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

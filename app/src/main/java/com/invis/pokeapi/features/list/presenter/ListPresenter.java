@@ -35,7 +35,7 @@ public class ListPresenter extends MvpPresenter<ListView> {
         this.loadPokemonList();
     }
 
-    protected void onAddList(){
+    public void onAddList(){
         listInteractor.loadPokemonList(new Carry<List<Pokemon>>() {
             @Override
             public void onSuccess(List<Pokemon> result) {
@@ -47,5 +47,17 @@ public class ListPresenter extends MvpPresenter<ListView> {
                 view.showError(throwable.getMessage());
             }
         });
+    }
+
+    public void maxPokemon (List<Pokemon> pokemonList, boolean checkAttack, boolean checkDefense, boolean checkHp){
+        if (pokemonList.size() != 0) {
+            int indexMaxPokemon = listInteractor.maxPokemon(pokemonList, checkAttack, checkDefense, checkHp);
+
+            Pokemon maxPokemon = pokemonList.get(indexMaxPokemon);
+            pokemonList.remove(indexMaxPokemon);
+            pokemonList.add(0, maxPokemon);
+
+            view.showPokemonList(pokemonList);
+        }
     }
 }
