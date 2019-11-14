@@ -2,8 +2,10 @@ package com.invis.pokeapi.features.list.presenter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.invis.pokeapi.R;
@@ -21,6 +23,7 @@ public class ListActivity extends BaseActivity implements ListView {
     private ArrayList<Pokemon> pokemonList;
     private RecyclerView recyclerView;
     private PokemonAdapter adapter;
+    private FloatingActionButton reloadButton;
     private boolean load;
 
     @Override
@@ -39,8 +42,6 @@ public class ListActivity extends BaseActivity implements ListView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-
-
         initView();
     }
 
@@ -56,6 +57,15 @@ public class ListActivity extends BaseActivity implements ListView {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        reloadButton = (FloatingActionButton) findViewById(R.id.button_reload);
+        reloadButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                adapter.clearPokemonAdapter();
+                listPresenter.onViewReady();
+            }
+        });
     }
 
     @Override

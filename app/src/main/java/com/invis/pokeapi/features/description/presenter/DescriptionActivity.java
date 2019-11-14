@@ -95,7 +95,7 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
                 .load(pokemon.getImageUrl())
                 .placeholder(R.drawable.pokemon_placeholder)
                 .error(R.drawable.pokemon_placeholder_error)
-                .resize(100, 100)
+                .resize(400, 400)
                 .into(pokemonImageView);
 
         pokemonNameView.setText(pokemon.getName());

@@ -35,6 +35,10 @@ class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> 
         return new PokemonHolder(itemView, selectPokemonListener);
     }
 
+    public void clearPokemonAdapter(){
+        pokemons.clear();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull PokemonHolder holder, int position) {
         holder.bind(pokemons.get(position));
