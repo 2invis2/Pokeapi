@@ -11,7 +11,7 @@ import com.invis.pokeapi.features.data.PokemonServerImpl;
 import com.invis.pokeapi.features.list.domain.ListInteractor;
 import com.invis.pokeapi.features.list.domain.ListInteractorImpl;
 
-final class PresenterFactory {
+final class ListPresenterFactory {
 
     static ListPresenter createPresenter(Context context) {
         final PokemonAPI api = App.getRetrofitProvider(context)
