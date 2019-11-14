@@ -30,7 +30,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
                 for (int i = 0; i < sizeList; i++) {
                     pokemonOrder = rndPokemonOrder.nextInt(allPokemon) + 1;
-                    pokemonServer.getPokemon(new String().valueOf(pokemonOrder), new Carry<PokemonJson>() {
+                    pokemonServer.loadPokemon(new String().valueOf(pokemonOrder), new Carry<PokemonJson>() {
                         @Override
                         public void onSuccess(PokemonJson result) {
                             pokemonList.add(result.toPokemon());

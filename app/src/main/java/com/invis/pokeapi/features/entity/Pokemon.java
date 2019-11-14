@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.invis.pokeapi.features.entity.more.PokemonStatApp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +21,7 @@ public class Pokemon implements Parcelable {
     private int weight;
     private List<String> types;
     private List<PokemonStatApp> stats;
+    private String imageUrl;
 
     public int indexStat(String statName){
         for (int i = 0; i < stats.size(); i++) {
@@ -44,7 +44,8 @@ public class Pokemon implements Parcelable {
         dest.writeInt(this.height);
         dest.writeInt(this.weight);
         dest.writeStringList(this.types);
-        dest.writeList(this.stats);
+        dest.writeTypedList(this.stats);
+        dest.writeString(this.imageUrl);
     }
 
     protected Pokemon(Parcel in) {
@@ -53,8 +54,8 @@ public class Pokemon implements Parcelable {
         this.height = in.readInt();
         this.weight = in.readInt();
         this.types = in.createStringArrayList();
-        this.stats = new ArrayList<PokemonStatApp>();
-        in.readList(this.stats, PokemonStatApp.class.getClassLoader());
+        this.stats = in.createTypedArrayList(PokemonStatApp.CREATOR);
+        this.imageUrl = in.readString();
     }
 
     public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {

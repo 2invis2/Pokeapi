@@ -44,14 +44,16 @@ public class PokemonJson {
 
     public Pokemon toPokemon(){
         ArrayList<String> pokemonTypes = new ArrayList<String>(0);
-        for (int i = 0; i < types.size(); i++){
-            pokemonTypes.add(types.get(i).getType().getName());
+        for (int i = 0; i < getTypes().size(); i++){
+            pokemonTypes.add(getTypes().get(i).getType().getName());
         }
 
         ArrayList<PokemonStatApp> pokemonStatsApp = new ArrayList<PokemonStatApp>(0);
-        for (int i = 0; i < stats.size(); i++){
-            pokemonStatsApp.add(stats.get(i).toPokemonStatApp());
+        for (int i = 0; i < getStats().size(); i++){
+            pokemonStatsApp.add(getStats().get(i).toPokemonStatApp());
         }
-        return new Pokemon(id, name, height, weight, pokemonTypes, pokemonStatsApp);
+
+        return new Pokemon(getId(), getName(), getHeight(),
+                getWeight(), pokemonTypes, pokemonStatsApp, getSprites().getFront_default());
     }
 }

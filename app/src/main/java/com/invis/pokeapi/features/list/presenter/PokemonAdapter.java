@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.invis.pokeapi.R;
 import com.invis.pokeapi.features.entity.Pokemon;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +61,13 @@ class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> 
         private final TextView pokemonAttackView;
         private final TextView pokemonDefenseView;
         private final TextView pokemonHpView;
+        private final ImageView pokemonImageView;
         private final SelectPokemonListener selectPokemonListener;
 
         PokemonHolder(View view, SelectPokemonListener selectBookListener) {
             super(view);
             this.selectPokemonListener = selectBookListener;
+            pokemonImageView = view.findViewById(R.id.pokemon_item_image);
             pokemonNameView = view.findViewById(R.id.pokemon_item_name);
             pokemonAttackView = view.findViewById(R.id.pokemon_item_attack);
             pokemonDefenseView = view.findViewById(R.id.pokemon_item_defense);
@@ -71,12 +75,25 @@ class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> 
         }
 
         void bind(final Pokemon pokemon) {
+
+            Picasso.get()
+                    .load(pokemon.getImageUrl())
+                    .placeholder(R.drawable.pokemon_placeholder)
+                    .error(R.drawable.pokemon_placeholder_error)
+                    .into(pokemonImageView);
+
             pokemonNameView.setText(pokemon.getName());
+
+            pokemonAttackView.setText(R.string.str_attack);
             pokemonAttackView.setText(pokemonAttackView.getText() +
                     String.valueOf(pokemon.getStats().get(pokemon.indexStat("attack")).getValue()));
+
+            pokemonDefenseView.setText(R.string.str_defense);
             pokemonDefenseView.setText(pokemonDefenseView.getText() +
                     String.valueOf(pokemon.getStats().get(pokemon.indexStat("defense")).getValue()));
-            pokemonHpView.setText(pokemonDefenseView.getText() +
+
+            pokemonHpView.setText(R.string.str_hp);
+            pokemonHpView.setText(pokemonHpView.getText() +
                     String.valueOf(pokemon.getStats().get(pokemon.indexStat("hp")).getValue()));
 
             itemView.setOnClickListener(new View.OnClickListener() {

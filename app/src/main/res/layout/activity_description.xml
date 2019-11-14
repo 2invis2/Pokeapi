@@ -16,7 +16,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/description_pokemon_sprites"
+                android:id="@+id/description_pokemon_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

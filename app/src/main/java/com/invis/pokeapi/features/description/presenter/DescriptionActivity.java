@@ -12,6 +12,7 @@ import com.invis.pokeapi.features.BaseActivity;
 import com.invis.pokeapi.features.MvpView;
 import com.invis.pokeapi.features.entity.Pokemon;
 import com.invis.pokeapi.features.list.presenter.ListActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -65,7 +66,7 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
     }
 
     private void initView(){
-        pokemonImageView = (ImageView) findViewById(R.id.description_pokemon_sprites);
+        pokemonImageView = (ImageView) findViewById(R.id.description_pokemon_image);
         pokemonNameView = (TextView) findViewById(R.id.description_pokemon_name);
         pokemonNumberView = (TextView) findViewById(R.id.description_pokemon_number);
         pokemonWeightView = (TextView) findViewById(R.id.description_pokemon_weight);
@@ -90,8 +91,15 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
 
     @Override
     public void showPokemon() {
+        Picasso.get()
+                .load(pokemon.getImageUrl())
+                .placeholder(R.drawable.pokemon_placeholder)
+                .error(R.drawable.pokemon_placeholder_error)
+                .resize(100, 100)
+                .into(pokemonImageView);
+
         pokemonNameView.setText(pokemon.getName());
-        pokemonNumberView.setText(pokemonNameView.getText() +
+        pokemonNumberView.setText(pokemonNumberView.getText() +
                 String.valueOf(pokemon.getOrder()));
         pokemonWeightView.setText(pokemonWeightView.getText() +
                 String.valueOf(pokemon.getWeight()));
