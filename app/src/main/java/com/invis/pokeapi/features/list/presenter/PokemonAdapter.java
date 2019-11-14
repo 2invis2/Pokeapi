@@ -55,6 +55,11 @@ class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> 
         notifyDataSetChanged();
     }
 
+    public void addPokemons(List<Pokemon> pokemonList) {
+        pokemons.addAll(pokemonList);
+        notifyDataSetChanged();
+    }
+
     public List<Pokemon> getPokemons(){
         return pokemons;
     }

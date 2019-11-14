@@ -34,4 +34,18 @@ public class ListPresenter extends MvpPresenter<ListView> {
     protected void onViewReady(){
         this.loadPokemonList();
     }
+
+    protected void onAddList(){
+        listInteractor.loadPokemonList(new Carry<List<Pokemon>>() {
+            @Override
+            public void onSuccess(List<Pokemon> result) {
+                view.addPokemonList(result);
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                view.showError(throwable.getMessage());
+            }
+        });
+    }
 }

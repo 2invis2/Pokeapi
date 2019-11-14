@@ -57,6 +57,17 @@ public class ListActivity extends BaseActivity implements ListView {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    listPresenter.onAddList();
+                }
+            }
+        });
+
         reloadButton = (FloatingActionButton) findViewById(R.id.button_reload);
         reloadButton.setOnClickListener(new View.OnClickListener() {
 
@@ -84,6 +95,11 @@ public class ListActivity extends BaseActivity implements ListView {
     @Override
     public void showPokemonList(List<Pokemon> pokemonList) {
         adapter.setPokemons(pokemonList);
+    }
+
+    @Override
+    public void addPokemonList(List<Pokemon> pokemonList) {
+        adapter.addPokemons(pokemonList);
     }
 
     @Override

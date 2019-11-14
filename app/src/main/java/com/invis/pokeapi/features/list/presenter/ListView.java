@@ -8,6 +8,9 @@ import java.util.List;
 public interface ListView extends MvpView {
 
     void showPokemonList(List<Pokemon> pokemonList);
+
+    void addPokemonList(List<Pokemon> pokemonList);
+
     void showError(String message);
 
     void hideActivity(Pokemon pokemon);
